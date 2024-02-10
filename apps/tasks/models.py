@@ -34,10 +34,7 @@ class Task(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    date_started = models.DateTimeField(
-        help_text='ДАТА, КОГДА ЗАДАЧА БЫЛА СОЗДАНА',
-        auto_now_add=True,
-    )
+    date_started = models.DateTimeField()
     deadline = models.DateTimeField()
     updated_at = models.DateTimeField(
         auto_now=True,
@@ -47,8 +44,6 @@ class Task(models.Model):
         return f"{self.title[:8]}..."
 
     class Meta:
-        verbose_name = 'Task'
         verbose_name_plural = 'Tasks'
         ordering = ['date_started']
-        unique_together = ('category', 'status', 'description')
         get_latest_by = 'date_started'

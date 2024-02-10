@@ -23,9 +23,6 @@ class SubTask(models.Model):
         Task,
         on_delete=models.CASCADE,
         related_name='subtasks',
-        limit_choices_to={
-            "status": 1,
-        }
     )
     category = models.ForeignKey(
         Category,
@@ -44,9 +41,7 @@ class SubTask(models.Model):
         on_delete=models.CASCADE,
         related_name='tasks'
     )
-    date_started = models.DateTimeField(
-        auto_now_add=True,
-    )
+    date_started = models.DateTimeField()
     deadline = models.DateTimeField()
     updated_at = models.DateTimeField(
         auto_now=True,
