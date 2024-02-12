@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.subtasks.serializers import SubTaskInfoSerializer
+from apps.subtasks.serializers import SubTaskShortInfoSerializer
 from apps.tasks.models import Task
 
 
@@ -11,7 +11,7 @@ class ListTasksSerializer(serializers.ModelSerializer):
 
 
 class TaskInfoSerializer(serializers.ModelSerializer):
-    subtasks = SubTaskInfoSerializer(many=True, read_only=True)
+    subtasks = SubTaskShortInfoSerializer(many=True, read_only=True)
     category = serializers.SlugRelatedField(
         slug_field='name',
         read_only=True
