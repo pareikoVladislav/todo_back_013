@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from django.utils import timezone
 
 from apps.subtasks.models import SubTask
 from apps.categories.models import Category
 from apps.statuses.models import Status
+from apps.custom_user.models import CustomUser
 
 
 class SubTaskShortInfoSerializer(serializers.ModelSerializer):
@@ -34,7 +34,7 @@ class ListSubTasksSerializer(serializers.ModelSerializer):
     )
     creator = serializers.SlugRelatedField(
         slug_field='email',
-        queryset=User.objects.all()
+        queryset=CustomUser.objects.all()
     )
 
     class Meta:
@@ -102,7 +102,7 @@ class SubTaskInfoSerializer(serializers.ModelSerializer):
     )
     creator = serializers.SlugRelatedField(
         slug_field='email',
-        queryset=User.objects.all()
+        queryset=CustomUser.objects.all()
     )
 
     class Meta:

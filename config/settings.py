@@ -46,12 +46,14 @@ INSTALLED_APPS = [
 
     # 3rd-party
     "rest_framework",
+    "drf_yasg",
 
     # local
     "apps.tasks.apps.TasksConfig",
     "apps.subtasks.apps.SubtasksConfig",
     "apps.statuses.apps.StatusesConfig",
     "apps.categories.apps.CategoriesConfig",
+    "apps.custom_user.apps.CustomUserConfig",
 ]
 
 MIDDLEWARE = [
@@ -65,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "config.urls"
+
+AUTH_USER_MODEL = "custom_user.CustomUser"
 
 TEMPLATES = [
     {

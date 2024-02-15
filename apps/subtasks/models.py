@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from apps.categories.models import Category
 from apps.statuses.models import Status
 from apps.tasks.models import Task
+from apps.custom_user.models import CustomUser
 
 
 def get_first_status():
@@ -37,7 +37,7 @@ class SubTask(models.Model):
         blank=True
     )
     creator = models.ForeignKey(
-        User,
+        CustomUser,
         on_delete=models.CASCADE,
         related_name='tasks'
     )

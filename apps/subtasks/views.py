@@ -15,6 +15,15 @@ class ListSubtasksGenericView(ListCreateAPIView):
             creator=self.request.user.id
         )
 
+        obj_status = self.request.query_params.get("status")
+        category = self.request.query_params.get("category")
+
+        if obj_status:
+            subtasks = subtasks.filter(status__name=obj_status)
+
+        if category:
+            subtasks = subtasks.filter(category__name=category)
+
         return subtasks
 
     def create_obj(self, data: dict) -> dict:

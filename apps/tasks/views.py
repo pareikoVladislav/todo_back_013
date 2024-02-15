@@ -46,8 +46,31 @@ from apps.tasks.models import Task
 
 
 class TasksListAPIView(APIView):
+
+    def get_queryset(self):
+        queryset = Task.objects.filter(
+            creator=self.request.user.id
+        )
+
+        # фильтрация(идёт через символ ? -> query_params) по status и category
+
+        status_obj = self.request.query_params.get("status")
+        category = self.request.query_params.get("category")
+
+        if status_obj:
+            queryset = queryset.filter(
+                status__name=status_obj
+            )
+
+        if category:
+            queryset = queryset.filter(
+                category__name=category
+            )
+
+        return queryset
+
     def get(self, request: Request, *args, **kwargs) -> Response:
-        tasks = Task.objects.all()
+        tasks = self.get_queryset()
 
         if tasks:
             serializer = ListTasksSerializer(tasks, many=True)

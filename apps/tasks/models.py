@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 from apps.categories.models import Category
 from apps.statuses.models import Status
 from apps.tasks.db_helpers import generate_default_title
+from apps.custom_user.models import CustomUser
 
 
 class Task(models.Model):
@@ -31,7 +31,7 @@ class Task(models.Model):
         blank=True
     )
     creator = models.ForeignKey(
-        User,
+        CustomUser,
         on_delete=models.CASCADE,
     )
     date_started = models.DateTimeField()

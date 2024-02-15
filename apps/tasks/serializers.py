@@ -1,10 +1,21 @@
 from rest_framework import serializers
 
+from apps.categories.models import Category
+from apps.statuses.models import Status
 from apps.subtasks.serializers import SubTaskShortInfoSerializer
 from apps.tasks.models import Task
 
 
 class ListTasksSerializer(serializers.ModelSerializer):
+    status = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=Status.objects.all()
+    )
+    category = serializers.SlugRelatedField(
+        slug_field="name",
+        queryset=Category.objects.all()
+    )
+
     class Meta:
         model = Task
         fields = '__all__'
